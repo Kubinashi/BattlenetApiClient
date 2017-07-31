@@ -34,5 +34,3 @@ Requires php 5.6 or higher, recommended is php 7.0 or higher
 - [ ] Profile Api
 - [ ] Ladder Api
 - [ ] Data Ressources
-
-Test
