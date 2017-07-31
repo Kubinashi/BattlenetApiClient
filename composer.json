@@ -1,0 +1,35 @@
+{
+  "name": "kubinashi/battlenet-api",
+  "type": "library",
+  "license": "MIT",
+  "keywords": [
+    "battlenet",
+    "wow",
+    "sc2",
+    "d3",
+    "ow"
+  ],
+
+  "authors": [
+    {
+      "name": "Willy Reiche",
+      "email": "willy.reiche@outlook.com"
+    }
+  ],
+
+  "require": {
+    "php": ">=5.6",
+    "guzzlehttp/guzzle": "^6.3"
+  },
+
+  "require-dev": {
+    "phpunit/phpunit": "3.* || 4.*",
+    "doctrine/instantiator": "1.0.5"
+  },
+
+  "autoload": {
+    "psr-4": {
+      "Kubinashi\\BattlenetApi\\": "src/"
+    }
+  }
+}
