@@ -28,6 +28,11 @@ use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Pvp\Bracket
 use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Pvp\PvpValueObject;
 use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\QuestsValueObject;
 use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\ReputationValueObject;
+use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Talent\SpecValueObject;
+use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Talent\TalentsValueObject;
+use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Talent\TalentValueObject;
+use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\TitleValueObject;
+use Kubinashi\BattlenetApi\WorldOfWarcraft\Model\SpellValueObject;
 
 /**
  * @author  Willy Reiche
@@ -370,6 +375,65 @@ class CharacterProfileApi{
     }
 
     /**
+     * A list of talent structures
+     *
+     * @return TalentsValueObject[]
+     */
+    public function getTalents()
+    {
+        $requestModel = $this->prepareRequestModel('talents');
+        $response = $this->requestService->doRequest($requestModel);
+        $responseObject = json_decode($response);
+        $talents = [];
+
+        foreach ($responseObject->talents as $talent) {
+            if (empty($talent->calcSpec)) {
+                continue;
+            }
+
+            $selected = false;
+            if (isset($talent->selected)) {
+                $selected = true;
+            }
+
+            $talentsValueObject = $this->prepareTalentsValueObject($talent);
+            $specValueObject = $this->prepareSpecValueObject($talent->spec);
+
+            $talents[] = new TalentValueObject(
+                $selected,
+                $talentsValueObject,
+                $specValueObject,
+                $talent->calcTalent,
+                $talent->calcSpec
+            );
+        }
+
+        return $talents;
+    }
+
+    /**
+     * A list of the titles obtained by the character including the currently selected title
+     *
+     * @return ReputationValueObject[]
+     */
+    public function getTitles()
+    {
+        $requestModel = $this->prepareRequestModel('titles');
+        $response = $this->requestService->doRequest($requestModel);
+        $responseObject = json_decode($response);
+        $titles = [];
+
+        foreach ($responseObject->titles as $title) {
+            $titles[] = new TitleValueObject(
+                $title->id,
+                $title->name
+            );
+        }
+
+        return $titles;
+    }
+
+    /**
      * @param string $addition
      * @return RequestModel
      */
@@ -604,5 +668,56 @@ class CharacterProfileApi{
         }
 
         return $brackets;
+    }
+
+    /**
+     * @param $talent
+     * @return TalentsValueObject[]
+     */
+    private function prepareTalentsValueObject($talent)
+    {
+        $talents = [];
+        foreach ($talent->talents as $talent) {
+            $cooldown = "";
+            if (isset($talent->spell->cooldown)) {
+                $cooldown = $talent->spell->cooldown;
+            }
+
+            $spell = new SpellValueObject(
+                $talent->spell->id,
+                $talent->spell->name,
+                $talent->spell->icon,
+                $talent->spell->description,
+                $talent->spell->castTime,
+                $cooldown
+            );
+
+            $spec = $this->prepareSpecValueObject($talent->spec);
+
+            $talents[] = new TalentsValueObject(
+                $talent->tier,
+                $talent->column,
+                $spell,
+                $spec
+            );
+        }
+
+        return $talents;
+    }
+
+    /**
+     * @param \StdClass $spec
+     * @return SpecValueObject
+     */
+    private function prepareSpecValueObject($spec)
+    {
+        return new SpecValueObject(
+            $spec->name,
+            $spec->role,
+            $spec->backgroundImage,
+            $spec->icon,
+            $spec->description,
+            $spec->order
+        );
     }
 }
