@@ -26,7 +26,7 @@ class FeedObjectFactory
 
     /**
      * @param \StdClass $feed
-     * @return FeedLootValueObject
+     * @return FeedLootValueObject|FeedBosskillValueObject|FeedAchievementValueObject|null
      */
     public function getFeedObject($feed)
     {
