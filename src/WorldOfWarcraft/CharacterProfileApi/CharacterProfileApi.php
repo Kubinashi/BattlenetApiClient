@@ -10,6 +10,7 @@ use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Achievement
 use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\AppearanceValueObject;
 use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\CharacterProfileValueObject;
 use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\EmblemValueObject;
+use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Feed\FeedObjectFactory;
 use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\GuildValueObject;
 use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\HunterPet\HunterPetSpecValueObject;
 use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\HunterPet\HunterPetValueObject;
@@ -154,6 +155,31 @@ class CharacterProfileApi{
         );
 
         return $appearance;
+    }
+
+    /**
+     * The activity feed of the character
+     * Based on the type you get a different Object to access
+     * - Achievement = FeedAchievementValueObject
+     * - Bosskill = FeedBosskillValueObject
+     * - Loot = FeedLootValueObject
+     *
+     * @return array
+     */
+    public function getFeed()
+    {
+        $requestModel = $this->prepareRequestModel('feed');
+        $response = $this->requestService->doRequest($requestModel);
+        $responseObject = json_decode($response);
+
+        $feedObjectFactory = new FeedObjectFactory();
+        $feedObj = [];
+
+        foreach ($responseObject->feed as $feed) {
+            $feedObj[] = $feedObjectFactory->getFeedObject($feed);
+        }
+
+        return $feedObj;
     }
 
     /**
