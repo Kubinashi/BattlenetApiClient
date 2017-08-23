@@ -14,6 +14,7 @@ use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Feed\FeedOb
 use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\GuildValueObject;
 use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\HunterPet\HunterPetSpecValueObject;
 use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\HunterPet\HunterPetValueObject;
+use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Item\ItemValueObject;
 use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Mount\MountsValueObject;
 use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Mount\MountValueObject;
 use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Pet\PetStatValueObject;
@@ -33,6 +34,7 @@ use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Talent\Spec
 use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Talent\TalentsValueObject;
 use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Talent\TalentValueObject;
 use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\TitleValueObject;
+use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Service\Item\ItemService;
 use Kubinashi\BattlenetApi\WorldOfWarcraft\Model\SpellValueObject;
 
 /**
@@ -218,6 +220,44 @@ class CharacterProfileApi{
         $responseObject = json_decode($response);
 
         return $this->prepareHunterPets($responseObject);
+    }
+
+    /**
+     * A list of items equipped by the character.
+     * Use of this field will also include the average item level and average item level equipped for the character.
+     *
+     * @return ItemValueObject
+     */
+    public function getItems()
+    {
+        $requestModel = $this->prepareRequestModel('items');
+        $response = $this->requestService->doRequest($requestModel);
+        $responseObject = json_decode($response);
+        $itemService = new ItemService();
+
+        $items = new ItemValueObject(
+            $responseObject->items->averageItemLevel,
+            $responseObject->items->averageItemLevelEquipped,
+            $itemService->getStandardItemValueObject($responseObject->items->head),
+            $itemService->getStandardItemValueObject($responseObject->items->neck),
+            $itemService->getStandardItemValueObject($responseObject->items->shoulder),
+            $itemService->getStandardItemValueObject($responseObject->items->back),
+            $itemService->getStandardItemValueObject($responseObject->items->chest),
+            $itemService->getStandardItemValueObject($responseObject->items->shirt),
+            $itemService->getStandardItemValueObject($responseObject->items->wrist),
+            $itemService->getStandardItemValueObject($responseObject->items->hands),
+            $itemService->getStandardItemValueObject($responseObject->items->waist),
+            $itemService->getStandardItemValueObject($responseObject->items->legs),
+            $itemService->getStandardItemValueObject($responseObject->items->feet),
+            $itemService->getStandardItemValueObject($responseObject->items->finger1),
+            $itemService->getStandardItemValueObject($responseObject->items->finger2),
+            $itemService->getStandardItemValueObject($responseObject->items->trinket1),
+            $itemService->getStandardItemValueObject($responseObject->items->trinket2),
+            $itemService->getWeaponItemValueObject($responseObject->items->mainHand),
+            $itemService->getWeaponItemValueObject($responseObject->items->offHand)
+        );
+
+        return $items;
     }
 
     /**
