@@ -138,14 +138,14 @@ class ItemService
     }
 
     /**
-     * @param \StdClass $artifactTraits
+     * @param \StdClass $item
      * @return ArtifactTraitValueObject[]
      */
-    private function getArtifactTraitValueObjects($artifactTraits)
+    private function getArtifactTraitValueObjects($item)
     {
         $itemArtifactTraits = [];
 
-        foreach ($artifactTraits as $artifactTrait) {
+        foreach ($item->artifactTraits as $artifactTrait) {
             $itemArtifactTraits[] = new ArtifactTraitValueObject(
                 $artifactTrait->id,
                 $artifactTrait->rank
@@ -156,14 +156,14 @@ class ItemService
     }
 
     /**
-     * @param \StdClass $relics
+     * @param \StdClass $item
      * @return RelicValueObject[]
      */
-    private function getRelicValueObjects($relics)
+    private function getRelicValueObjects($item)
     {
         $itemRelics = [];
 
-        foreach ($relics as $relic) {
+        foreach ($item->relics as $relic) {
             $itemRelics[] = new RelicValueObject(
                 $relic->socket,
                 $relic->itemId,
