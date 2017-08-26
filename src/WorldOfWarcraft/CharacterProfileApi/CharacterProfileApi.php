@@ -8,6 +8,7 @@ use Kubinashi\BattlenetApi\Model\RequestModel;
 use Kubinashi\BattlenetApi\Service\RequestService;
 use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\AchievementsValueObject;
 use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\AppearanceValueObject;
+use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Audit\AuditValueObject;
 use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\CharacterProfileValueObject;
 use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\EmblemValueObject;
 use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Feed\FeedObjectFactory;
@@ -535,6 +536,31 @@ class CharacterProfileApi{
         }
 
         return $titles;
+    }
+
+    /**
+     * Raw character audit data that powers the character audit on the game site
+     * It's broken down to the most recent issues so for example no belt buckle
+     *
+     * @return AuditValueObject
+     */
+    public function getAudit()
+    {
+        $requestModel = $this->prepareRequestModel('audit');
+        $response = $this->requestService->doRequest($requestModel);
+        $responseObject = json_decode($response);
+
+        $audit = new AuditValueObject(
+            $responseObject->audit->numberOfIssues,
+            $responseObject->audit->slots,
+            $responseObject->audit->unspentTalentPoints,
+            $responseObject->audit->unenchantedItems,
+            $responseObject->audit->emptySockets,
+            $responseObject->audit->itemsWithEmptySockets,
+            $responseObject->audit->appropriateArmorType
+        );
+
+        return $audit;
     }
 
     /**
