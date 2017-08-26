@@ -12,7 +12,7 @@ use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Statistic\S
 class StatisticService
 {
     /**
-     * @param $statistics
+     * @param \StdClass $statistics
      *
      * @return StatisticsValueObject
      */
@@ -39,7 +39,7 @@ class StatisticService
     }
 
     /**
-     * @param $subCategories
+     * @param \StdClass $subCategories
      *
      * @return StatisticsValueObject[]
      */
@@ -53,7 +53,7 @@ class StatisticService
     }
 
     /**
-     * @param $statistics
+     * @param \StdClass $statistics
      *
      * @return StatisticValueObject[]
      */
