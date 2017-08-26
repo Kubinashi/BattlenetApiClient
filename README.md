@@ -15,7 +15,7 @@ Requires php 5.6 or higher, recommended is php 7.0 or higher
 - [ ] Achievement Api
 - [ ] Auction Api
 - [ ] Boss Api
-- [ ] Challenge Mode Api
+- [x] Challenge Mode Api
 - [ ] Character Profile Api
 - [ ] Guild Profile Api
 - [ ] Item Api
