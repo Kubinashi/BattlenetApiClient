@@ -39,7 +39,7 @@ class StatisticService
     }
 
     /**
-     * @param \StdClass $subCategories
+     * @param \StdClass[] $subCategories
      *
      * @return StatisticsValueObject[]
      */
@@ -53,7 +53,7 @@ class StatisticService
     }
 
     /**
-     * @param \StdClass $statistics
+     * @param \StdClass[] $statistics
      *
      * @return StatisticValueObject[]
      */
