@@ -30,11 +30,13 @@ use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Pvp\Bracket
 use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Pvp\PvpValueObject;
 use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\QuestsValueObject;
 use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\ReputationValueObject;
+use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Statistic\StatisticsValueObject;
 use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Talent\SpecValueObject;
 use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Talent\TalentsValueObject;
 use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Talent\TalentValueObject;
 use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\TitleValueObject;
-use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Service\Item\ItemService;
+use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Service\ItemService;
+use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Service\StatisticService;
 use Kubinashi\BattlenetApi\WorldOfWarcraft\Model\SpellValueObject;
 
 /**
@@ -438,6 +440,23 @@ class CharacterProfileApi{
         }
 
         return $reputations;
+    }
+
+    /**
+     * A map of character statistics
+     *
+     * @return StatisticsValueObject
+     */
+    public function getStatistics()
+    {
+        $requestModel = $this->prepareRequestModel('statistics');
+        $response = $this->requestService->doRequest($requestModel);
+        $responseObject = json_decode($response);
+        $statisticsService = new StatisticService();
+
+        $statistics = $statisticsService->getStatistics($responseObject->statistics);
+
+        return $statistics;
     }
 
     /**

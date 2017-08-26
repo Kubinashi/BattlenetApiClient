@@ -1,6 +1,6 @@
 <?php
 
-namespace Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Service\Item;
+namespace Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Service;
 
 use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Item\ArtifactTraitValueObject;
 use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Item\DamageValueObject;
