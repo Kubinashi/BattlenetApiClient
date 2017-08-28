@@ -10,12 +10,12 @@ namespace Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Profession\
 class ProfessionsValueObject
 {
     /**
-     * @var ProfessionValueObject
+     * @var ProfessionValueObject[]
      */
     private $primaryProfessions;
 
     /**
-     * @var ProfessionValueObject
+     * @var ProfessionValueObject[]
      */
     private $secondaryProfessions;
 
