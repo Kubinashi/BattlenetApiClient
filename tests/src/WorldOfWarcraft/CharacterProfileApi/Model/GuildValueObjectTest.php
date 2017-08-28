@@ -5,7 +5,7 @@
  * @version 1.0
  */
 
-use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\GuildValueObject;
+use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Guild\Model\GuildValueObject;
 
 class GuildValueObjectTest extends PHPUnit_Framework_TestCase
 {
@@ -21,7 +21,17 @@ class GuildValueObjectTest extends PHPUnit_Framework_TestCase
         $this->realm = uniqid();
         $this->battlegroup = uniqid();
         $this->members = uniqid();
-        $this->emblemValueObject = $this->getMockBuilder('Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\EmblemValueObject')->disableOriginalConstructor()->getMock();
+
+        $this->emblemValueObject = new \Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Guild\Model\EmblemValueObject(
+            uniqid(),
+            uniqid(),
+            uniqid(),
+            uniqid(),
+            uniqid(),
+            uniqid(),
+            uniqid(),
+            uniqid()
+        );
     }
 
     public function testGetName()

@@ -5,7 +5,7 @@
  * @version 1.0
  */
 
-use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\CharacterProfileValueObject;
+use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\CharacterProfile\Model\CharacterProfileValueObject;
 
 class CharacterProfileValueObjectTest extends PHPUnit_Framework_TestCase
 {

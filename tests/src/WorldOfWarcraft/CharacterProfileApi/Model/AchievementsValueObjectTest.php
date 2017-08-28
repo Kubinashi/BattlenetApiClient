@@ -5,7 +5,7 @@
  * @version 1.0
  */
 
-use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\AchievementsValueObject;
+use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Achievement\Model\AchievementsValueObject;
 
 class AchievementsValueObjectTest extends PHPUnit_Framework_TestCase
 {

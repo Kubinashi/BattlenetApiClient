@@ -6,41 +6,25 @@ use Kubinashi\BattlenetApi\Model\AuthenticationModel;
 use Kubinashi\BattlenetApi\Model\Franchises;
 use Kubinashi\BattlenetApi\Model\RequestModel;
 use Kubinashi\BattlenetApi\Service\RequestService;
-use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\AchievementsValueObject;
-use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\AppearanceValueObject;
-use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Audit\AuditValueObject;
-use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\CharacterProfileValueObject;
-use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\EmblemValueObject;
-use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Feed\FeedObjectFactory;
-use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\GuildValueObject;
-use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\HunterPet\HunterPetSpecValueObject;
-use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\HunterPet\HunterPetValueObject;
-use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Item\ItemValueObject;
-use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Mount\MountsValueObject;
-use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Mount\MountValueObject;
-use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Pet\PetStatValueObject;
-use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Pet\PetsValueObject;
-use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Pet\PetValueObject;
-use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\PetSlotsValueObject;
-use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Profession\ProfessionsValueObject;
-use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Profession\ProfessionValueObject;
-use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Progression\BossValueObject;
-use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Progression\ProgressionValueObject;
-use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Progression\RaidValueObject;
-use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Pvp\BracketValueObject;
-use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Pvp\PvpValueObject;
-use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\QuestsValueObject;
-use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\ReputationValueObject;
-use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Stat\StatValueObject;
-use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Statistic\StatisticsValueObject;
-use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Talent\SpecValueObject;
-use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Talent\TalentsValueObject;
-use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Talent\TalentValueObject;
-use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\TitleValueObject;
-use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Service\ItemService;
-use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Service\StatisticService;
-use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Service\StatService;
-use Kubinashi\BattlenetApi\WorldOfWarcraft\Model\SpellValueObject;
+use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Achievement\Model\AchievementsValueObject;
+use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Appearance\Model\AppearanceValueObject;
+use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Collection\Service\CollectionService;
+use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Guild\Service\GuildService;
+use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\HunterPet\Service\HunterPetService;
+use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Audit\Model\AuditValueObject;
+use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\CharacterProfile\Model\CharacterProfileValueObject;
+use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Feed\FeedObjectFactory;
+use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Quest\Model\QuestsValueObject;
+use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Reputation\Model\ReputationValueObject;
+use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Title\Model\TitleValueObject;
+use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\PetSlot\Model\PetSlotsValueObject;
+use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Profession\Service\ProfessionService;
+use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Progression\Service\ProgressionService;
+use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Pvp\Service\PvpService;
+use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Item\Service\ItemService;
+use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Statistic\Service\StatisticService;
+use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Stat\Service\StatService;
+use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Talent\Service\TalentService;
 
 /**
  * @author  Willy Reiche
@@ -93,9 +77,7 @@ class CharacterProfileApi{
      */
     public function getCharacterProfile()
     {
-        $requestModel = $this->prepareRequestModel();
-        $response = $this->requestService->doRequest($requestModel);
-        $responseObject = json_decode($response);
+        $responseObject = $this->prepareResponseObject();
 
         $characterProfile = new CharacterProfileValueObject(
             $responseObject->lastModified,
@@ -123,9 +105,7 @@ class CharacterProfileApi{
      */
     public function getAchievements()
     {
-        $requestModel = $this->prepareRequestModel('achievements');
-        $response = $this->requestService->doRequest($requestModel);
-        $responseObject = json_decode($response);
+        $responseObject = $this->prepareResponseObject('achievements');
 
         $achievements = new AchievementsValueObject(
             $responseObject->achievements->achievementsCompleted,
@@ -146,9 +126,7 @@ class CharacterProfileApi{
      */
     public function getAppearance()
     {
-        $requestModel = $this->prepareRequestModel('appearance');
-        $response = $this->requestService->doRequest($requestModel);
-        $responseObject = json_decode($response);
+        $responseObject = $this->prepareResponseObject('appearance');
 
         $appearance = new AppearanceValueObject(
             $responseObject->appearance->faceVariation,
@@ -175,9 +153,7 @@ class CharacterProfileApi{
      */
     public function getFeed()
     {
-        $requestModel = $this->prepareRequestModel('feed');
-        $response = $this->requestService->doRequest($requestModel);
-        $responseObject = json_decode($response);
+        $responseObject = $this->prepareResponseObject('feed');
 
         $feedObjectFactory = new FeedObjectFactory();
         $feedObj = [];
@@ -192,127 +168,67 @@ class CharacterProfileApi{
     /**
      * A summary of the guild that the character belongs to
      *
-     * @return GuildValueObject
+     * @return Guild\Model\GuildValueObject
      */
     public function getGuild()
     {
-        $requestModel = $this->prepareRequestModel('guild');
-        $response = $this->requestService->doRequest($requestModel);
-        $responseObject = json_decode($response);
+        $responseObject = $this->prepareResponseObject('guild');
+        $guildService = new GuildService();
 
-        $emblemValueObject = $this->prepareEmblem($responseObject->guild->emblem);
-
-        $guild = new GuildValueObject(
-            $responseObject->guild->name,
-            $responseObject->guild->realm,
-            $responseObject->guild->battlegroup,
-            $responseObject->guild->members,
-            $emblemValueObject
-        );
-
-        return $guild;
+        return $guildService->prepareGuildValueObject($responseObject->guild);
     }
 
     /**
      * A list of all of the combat pets obtained by the character
      *
-     * @return HunterPetValueObject[]
+     * @return HunterPet\Model\HunterPetValueObject[]
      */
     public function getHunterPets()
     {
-        $requestModel = $this->prepareRequestModel('hunterPets');
-        $response = $this->requestService->doRequest($requestModel);
-        $responseObject = json_decode($response);
+        $responseObject = $this->prepareResponseObject('hunterPets');
+        $hunterPetService = new HunterPetService();
 
-        return $this->prepareHunterPets($responseObject);
+        return $hunterPetService->prepareHunterPets($responseObject);
     }
 
     /**
      * A list of items equipped by the character.
      * Use of this field will also include the average item level and average item level equipped for the character.
      *
-     * @return ItemValueObject
+     * @return Item\Model\ItemValueObject
      */
     public function getItems()
     {
-        $requestModel = $this->prepareRequestModel('items');
-        $response = $this->requestService->doRequest($requestModel);
-        $responseObject = json_decode($response);
+        $responseObject = $this->prepareResponseObject('items');
         $itemService = new ItemService();
 
-        $items = new ItemValueObject(
-            $responseObject->items->averageItemLevel,
-            $responseObject->items->averageItemLevelEquipped,
-            $itemService->getStandardItemValueObject($responseObject->items->head),
-            $itemService->getStandardItemValueObject($responseObject->items->neck),
-            $itemService->getStandardItemValueObject($responseObject->items->shoulder),
-            $itemService->getStandardItemValueObject($responseObject->items->back),
-            $itemService->getStandardItemValueObject($responseObject->items->chest),
-            $itemService->getStandardItemValueObject($responseObject->items->shirt),
-            $itemService->getStandardItemValueObject($responseObject->items->wrist),
-            $itemService->getStandardItemValueObject($responseObject->items->hands),
-            $itemService->getStandardItemValueObject($responseObject->items->waist),
-            $itemService->getStandardItemValueObject($responseObject->items->legs),
-            $itemService->getStandardItemValueObject($responseObject->items->feet),
-            $itemService->getStandardItemValueObject($responseObject->items->finger1),
-            $itemService->getStandardItemValueObject($responseObject->items->finger2),
-            $itemService->getStandardItemValueObject($responseObject->items->trinket1),
-            $itemService->getStandardItemValueObject($responseObject->items->trinket2),
-            $itemService->getWeaponItemValueObject($responseObject->items->mainHand),
-            $itemService->getWeaponItemValueObject($responseObject->items->offHand)
-        );
-
-        return $items;
+        return $itemService->prepareItemValueObject($responseObject->items);
     }
 
     /**
      * A list of all of the mounts obtained by the character
      *
-     * @return MountsValueObject
+     * @return Collection\Model\CollectionValueObject
      */
     public function getMounts()
     {
-        $requestModel = $this->prepareRequestModel('mounts');
-        $response = $this->requestService->doRequest($requestModel);
-        $responseObject = json_decode($response);
+        $responseObject = $this->prepareResponseObject('mounts');
+        $collectionService = new CollectionService();
 
-        $collectedMounts = [];
-        foreach ($responseObject->mounts->collected as $mount) {
-            $collectedMounts[] = $this->prepareMountValueObject($mount);
-        }
-
-        $mounts = new MountsValueObject(
-            $responseObject->mounts->numCollected,
-            $responseObject->mounts->numNotCollected,
-            $collectedMounts
-        );
-
-        return $mounts;
+        return $collectionService->prepareCollectionValueObject($responseObject->mounts, CollectionService::MOUNT);
     }
 
     /**
      * A list of the battle pets obtained by the character
      *
-     * @return PetsValueObject
+     * @return Collection\Model\CollectionValueObject
      */
     public function getPets()
     {
-        $requestModel = $this->prepareRequestModel('pets');
-        $response = $this->requestService->doRequest($requestModel);
-        $responseObject = json_decode($response);
+        $responseObject = $this->prepareResponseObject('pets');
+        $collectionService = new CollectionService();
 
-        $collectedPets = [];
-        foreach ($responseObject->pets->collected as $pet) {
-            $collectedPets[] = $this->preparePetValueObject($pet);
-        }
-
-        $pets = new PetsValueObject(
-            $responseObject->pets->numCollected,
-            $responseObject->pets->numNotCollected,
-            $collectedPets
-        );
-
-        return $pets;
+        return $collectionService->prepareCollectionValueObject($responseObject->pets, CollectionService::PET);
     }
 
     /**
@@ -322,9 +238,7 @@ class CharacterProfileApi{
      */
     public function getPetSlots()
     {
-        $requestModel = $this->prepareRequestModel('petSlots');
-        $response = $this->requestService->doRequest($requestModel);
-        $responseObject = json_decode($response);
+        $responseObject = $this->prepareResponseObject('petSlots');
         $petSlots = [];
 
         foreach ($responseObject->petSlots as $petSlot) {
@@ -343,63 +257,40 @@ class CharacterProfileApi{
     /**
      * A list of the character's professions. Does not include class professions
      *
-     * @return ProfessionsValueObject
+     * @return Profession\Model\ProfessionsValueObject
      */
     public function getProfessions()
     {
-        $requestModel = $this->prepareRequestModel('professions');
-        $response = $this->requestService->doRequest($requestModel);
-        $responseObject = json_decode($response);
+        $responseObject = $this->prepareResponseObject('professions');
+        $professionService = new ProfessionService();
 
-        $primaryProfessions = $this->prepareProfessionValueObject($responseObject->professions->primary);
-        $secondaryProfessions = $this->prepareProfessionValueObject($responseObject->professions->secondary);
-
-        $professions = new ProfessionsValueObject(
-            $primaryProfessions,
-            $secondaryProfessions
-        );
-
-        return $professions;
+        return $professionService->prepareProfessionsValueObject($responseObject->professions);
     }
 
     /**
      * A list of raids and bosses indicating raid progression and completeness
      *
-     * @return ProgressionValueObject
+     * @return Progression\Model\ProgressionValueObject
      */
     public function getProgression()
     {
-        $requestModel = $this->prepareRequestModel('progression');
-        $response = $this->requestService->doRequest($requestModel);
-        $responseObject = json_decode($response);
+        $responseObject = $this->prepareResponseObject('progression');
+        $progressionService = new ProgressionService();
 
-        $raids = $this->prepareRaidValueObject($responseObject);
-
-        $progression = new ProgressionValueObject(
-            $raids
-        );
-
-        return $progression;
+        return $progressionService->prepareProgressionValueObject($responseObject);
     }
 
     /**
      * A map of pvp information including arena team membership and rated battlegrounds information
      *
-     * @return PvpValueObject
+     * @return Pvp\Model\PvpValueObject
      */
     public function getPvp()
     {
-        $requestModel = $this->prepareRequestModel('pvp');
-        $response = $this->requestService->doRequest($requestModel);
-        $responseObject = json_decode($response);
+        $responseObject = $this->prepareResponseObject('pvp');
+        $pvpService = new PvpService();
 
-        $brackets = $this->prepareBracketValueObject($responseObject);
-
-        $progression = new PvpValueObject(
-            $brackets
-        );
-
-        return $progression;
+        return $pvpService->preparePvpValueObject($responseObject);
     }
 
     /**
@@ -409,9 +300,7 @@ class CharacterProfileApi{
      */
     public function getQuests()
     {
-        $requestModel = $this->prepareRequestModel('quests');
-        $response = $this->requestService->doRequest($requestModel);
-        $responseObject = json_decode($response);
+        $responseObject = $this->prepareResponseObject('quests');
 
         $quests = new QuestsValueObject(
             $responseObject->quests
@@ -427,9 +316,7 @@ class CharacterProfileApi{
      */
     public function getReputation()
     {
-        $requestModel = $this->prepareRequestModel('reputation');
-        $response = $this->requestService->doRequest($requestModel);
-        $responseObject = json_decode($response);
+        $responseObject = $this->prepareResponseObject('reputation');
         $reputations = [];
 
         foreach ($responseObject->reputation as $reputation) {
@@ -448,13 +335,11 @@ class CharacterProfileApi{
     /**
      * A map of character statistics
      *
-     * @return StatisticsValueObject
+     * @return Statistic\Model\StatisticsValueObject
      */
     public function getStatistics()
     {
-        $requestModel = $this->prepareRequestModel('statistics');
-        $response = $this->requestService->doRequest($requestModel);
-        $responseObject = json_decode($response);
+        $responseObject = $this->prepareResponseObject('statistics');
         $statisticsService = new StatisticService();
 
         $statistics = $statisticsService->getStatistics($responseObject->statistics);
@@ -465,13 +350,11 @@ class CharacterProfileApi{
     /**
      * A map of character attributes and stats
      *
-     * @return StatValueObject
+     * @return Stat\Model\StatValueObject
      */
     public function getStats()
     {
-        $requestModel = $this->prepareRequestModel('stats');
-        $response = $this->requestService->doRequest($requestModel);
-        $responseObject = json_decode($response);
+        $responseObject = $this->prepareResponseObject('stats');
         $statService = new StatService();
 
         $stats = $statService->getStatValueObject($responseObject->stats);
@@ -482,38 +365,14 @@ class CharacterProfileApi{
     /**
      * A list of talent structures
      *
-     * @return TalentsValueObject[]
+     * @return Talent\Model\TalentValueObject[]
      */
     public function getTalents()
     {
-        $requestModel = $this->prepareRequestModel('talents');
-        $response = $this->requestService->doRequest($requestModel);
-        $responseObject = json_decode($response);
-        $talents = [];
+        $responseObject = $this->prepareResponseObject('talents');
+        $talentService = new TalentService();
 
-        foreach ($responseObject->talents as $talent) {
-            if (empty($talent->calcSpec)) {
-                continue;
-            }
-
-            $selected = false;
-            if (isset($talent->selected)) {
-                $selected = true;
-            }
-
-            $talentsValueObject = $this->prepareTalentsValueObject($talent);
-            $specValueObject = $this->prepareSpecValueObject($talent->spec);
-
-            $talents[] = new TalentValueObject(
-                $selected,
-                $talentsValueObject,
-                $specValueObject,
-                $talent->calcTalent,
-                $talent->calcSpec
-            );
-        }
-
-        return $talents;
+        return $talentService->prepareTalentValueObject($responseObject);
     }
 
     /**
@@ -523,9 +382,7 @@ class CharacterProfileApi{
      */
     public function getTitles()
     {
-        $requestModel = $this->prepareRequestModel('titles');
-        $response = $this->requestService->doRequest($requestModel);
-        $responseObject = json_decode($response);
+        $responseObject = $this->prepareResponseObject('titles');
         $titles = [];
 
         foreach ($responseObject->titles as $title) {
@@ -546,9 +403,7 @@ class CharacterProfileApi{
      */
     public function getAudit()
     {
-        $requestModel = $this->prepareRequestModel('audit');
-        $response = $this->requestService->doRequest($requestModel);
-        $responseObject = json_decode($response);
+        $responseObject = $this->prepareResponseObject('audit');
 
         $audit = new AuditValueObject(
             $responseObject->audit->numberOfIssues,
@@ -567,7 +422,7 @@ class CharacterProfileApi{
      * @param string $addition
      * @return RequestModel
      */
-    private function prepareRequestModel($addition = '')
+    private function prepareRequestModel($addition)
     {
         return new RequestModel(
             $this->authenticationModel->getRegion(),
@@ -581,273 +436,16 @@ class CharacterProfileApi{
     }
 
     /**
-     * @param \StdClass $spec
-     * @return HunterPetSpecValueObject
-     */
-    private function prepareHunterPetSpecValueObject(\StdClass $spec)
-    {
-        return new HunterPetSpecValueObject(
-            $spec->name,
-            $spec->role,
-            $spec->backgroundImage,
-            $spec->icon,
-            $spec->description,
-            $spec->order
-        );
-    }
-
-    /**
-     * @param array $professions
+     * @param string $addition
      *
-     * @return array
+     * @return \StdClass
      */
-    private function prepareProfessionValueObject($professions) {
-        $characterProfessions = [];
-
-        foreach ($professions as $profession) {
-            $characterProfessions[] = new ProfessionValueObject(
-                $profession->id,
-                $profession->name,
-                $profession->icon,
-                $profession->rank,
-                $profession->max,
-                $profession->recipes
-            );
-        }
-
-        return $characterProfessions;
-    }
-
-    /**
-     * @param \StdClass $emblem
-     * @return EmblemValueObject
-     */
-    private function prepareEmblem($emblem)
+    private function prepareResponseObject($addition = '')
     {
-        return new EmblemValueObject (
-            $emblem->icon,
-            $emblem->iconColor,
-            $emblem->iconColorId,
-            $emblem->border,
-            $emblem->borderColor,
-            $emblem->borderColorId,
-            $emblem->backgroundColor,
-            $emblem->backgroundColorId
-        );
-    }
+        $requestModel = $this->prepareRequestModel($addition);
+        $response = $this->requestService->doRequest($requestModel);
+        $responseObject = json_decode($response);
 
-    /**
-     * @param \StdClass $mount
-     * @return MountValueObject
-     */
-    private function prepareMountValueObject(\StdClass $mount)
-    {
-        return new MountValueObject(
-            $mount->name,
-            $mount->spellId,
-            $mount->creatureId,
-            $mount->itemId,
-            $mount->qualityId,
-            $mount->icon,
-            $mount->isGround,
-            $mount->isFlying,
-            $mount->isAquatic,
-            $mount->isJumping
-        );
-    }
-
-    /**
-     * @param \StdClass $responseObject
-     * @return HunterPetValueObject[]
-     */
-    private function prepareHunterPets(\StdClass $responseObject)
-    {
-        $hunterPets = [];
-        foreach ($responseObject->hunterPets as $hunterPet) {
-            $hunterPetSpecValueObject = null;
-            if (isset($hunterPet->spec)) {
-                $hunterPetSpecValueObject = $this->prepareHunterPetSpecValueObject($hunterPet->spec);
-            }
-
-            $hunterPets[] = new HunterPetValueObject(
-                $hunterPet->name,
-                $hunterPet->creature,
-                $hunterPet->slot,
-                $hunterPet->calcSpec,
-                $hunterPet->familyId,
-                $hunterPet->familyName,
-                $hunterPetSpecValueObject
-            );
-        }
-
-        return $hunterPets;
-    }
-
-    /**
-     * @param \StdClass $pet
-     * @return PetValueObject
-     */
-    private function preparePetValueObject($pet)
-    {
-        $petStatValueObject = $this->preparePetStatsValueObject($pet->stats);
-
-        return new PetValueObject(
-            $pet->name,
-            $pet->spellId,
-            $pet->creatureId,
-            $pet->itemId,
-            $pet->qualityId,
-            $pet->icon,
-            $petStatValueObject,
-            $pet->battlePetGuid,
-            $pet->isFavorite,
-            $pet->isFirstAbilitySlotSelected,
-            $pet->isSecondAbilitySlotSelected,
-            $pet->isThirdAbilitySlotSelected,
-            $pet->creatureName,
-            $pet->canBattle
-        );
-    }
-
-    /**
-     * @param \StdClass $stats
-     * @return PetStatValueObject
-     */
-    private function preparePetStatsValueObject($stats)
-    {
-        return new PetStatValueObject(
-            $stats->speciesId,
-            $stats->breedId,
-            $stats->petQualityId,
-            $stats->level,
-            $stats->health,
-            $stats->power,
-            $stats->speed
-        );
-    }
-
-    /**
-     * @param \StdClass $raid
-     * @return BossValueObject[]
-     */
-    private function prepareBossValueObject($raid)
-    {
-        $bosses = [];
-        foreach ($raid->bosses as $boss) {
-            $bosses[] = new BossValueObject(
-                $boss->id,
-                $boss->name,
-                $boss->lfrKills,
-                $boss->lfrTimestamp,
-                $boss->normalKills,
-                $boss->normalTimestamp,
-                $boss->heroicKills,
-                $boss->heroicTimestamp,
-                $boss->mythicKills,
-                $boss->mythicTimestamp
-            );
-        }
-
-        return $bosses;
-    }
-
-    /**
-     * @param \StdClass $responseObject
-     * @return RaidValueObject[]
-     */
-    private function prepareRaidValueObject($responseObject)
-    {
-        $raids = [];
-
-        foreach ($responseObject->progression->raids as $raid) {
-            $bosses = $this->prepareBossValueObject($raid);
-
-            $raids[] = new RaidValueObject(
-                $raid->name,
-                $raid->lfr,
-                $raid->normal,
-                $raid->heroic,
-                $raid->mythic,
-                $raid->id,
-                $bosses
-            );
-        }
-
-        return $raids;
-    }
-
-    /**
-     * @param \StdClass $responseObject
-     * @return BracketValueObject[]
-     */
-    private function prepareBracketValueObject($responseObject)
-    {
-        $brackets = [];
-
-        foreach ($responseObject->pvp->brackets as $bracket) {
-            $brackets[] = new BracketValueObject(
-                $bracket->slug,
-                $bracket->rating,
-                $bracket->weeklyPlayed,
-                $bracket->weeklyWon,
-                $bracket->weeklyLost,
-                $bracket->seasonPlayed,
-                $bracket->seasonWon,
-                $bracket->seasonLost
-            );
-        }
-
-        return $brackets;
-    }
-
-    /**
-     * @param $talent
-     * @return TalentsValueObject[]
-     */
-    private function prepareTalentsValueObject($talent)
-    {
-        $talents = [];
-        foreach ($talent->talents as $talent) {
-            $cooldown = "";
-            if (isset($talent->spell->cooldown)) {
-                $cooldown = $talent->spell->cooldown;
-            }
-
-            $spell = new SpellValueObject(
-                $talent->spell->id,
-                $talent->spell->name,
-                $talent->spell->icon,
-                $talent->spell->description,
-                $talent->spell->castTime,
-                $cooldown
-            );
-
-            $spec = $this->prepareSpecValueObject($talent->spec);
-
-            $talents[] = new TalentsValueObject(
-                $talent->tier,
-                $talent->column,
-                $spell,
-                $spec
-            );
-        }
-
-        return $talents;
-    }
-
-    /**
-     * @param \StdClass $spec
-     * @return SpecValueObject
-     */
-    private function prepareSpecValueObject($spec)
-    {
-        return new SpecValueObject(
-            $spec->name,
-            $spec->role,
-            $spec->backgroundImage,
-            $spec->icon,
-            $spec->description,
-            $spec->order
-        );
+        return $responseObject;
     }
 }

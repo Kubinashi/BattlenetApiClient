@@ -37,7 +37,7 @@ class CharacterProfileApiTest extends PHPUnit_Framework_TestCase
             $this->realm
         );
 
-        $this->assertInstanceOf('Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\AchievementsValueObject', $api->getAchievements());
+        $this->assertInstanceOf('Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Achievement\Model\AchievementsValueObject', $api->getAchievements());
     }
 
     public function testGetCharacterProfile()
@@ -49,7 +49,7 @@ class CharacterProfileApiTest extends PHPUnit_Framework_TestCase
             $this->realm
         );
 
-        $this->assertInstanceOf('Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\CharacterProfileValueObject', $api->getCharacterProfile());
+        $this->assertInstanceOf('Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\CharacterProfile\Model\CharacterProfileValueObject', $api->getCharacterProfile());
     }
 
     public function testGetAppearance()
@@ -61,7 +61,7 @@ class CharacterProfileApiTest extends PHPUnit_Framework_TestCase
             $this->realm
         );
 
-        $this->assertInstanceOf('Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\AppearanceValueObject', $api->getAppearance());
+        $this->assertInstanceOf('Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Appearance\Model\AppearanceValueObject', $api->getAppearance());
     }
 
     public function testGetGuild()
@@ -73,7 +73,7 @@ class CharacterProfileApiTest extends PHPUnit_Framework_TestCase
             $this->realm
         );
 
-        $this->assertInstanceOf('Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\GuildValueObject', $api->getGuild());
+        $this->assertInstanceOf('Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Guild\Model\GuildValueObject', $api->getGuild());
     }
 
     public function testGetHunterPets()
@@ -85,7 +85,7 @@ class CharacterProfileApiTest extends PHPUnit_Framework_TestCase
             'Eredar'
         );
 
-        $this->assertContainsOnlyInstancesOf('Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\HunterPet\HunterPetValueObject', $api->getHunterPets());
+        $this->assertContainsOnlyInstancesOf('Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\HunterPet\Model\HunterPetValueObject', $api->getHunterPets());
     }
 
     public function testGetProfessions()
@@ -97,7 +97,7 @@ class CharacterProfileApiTest extends PHPUnit_Framework_TestCase
             $this->realm
         );
 
-        $this->assertInstanceOf('Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Profession\ProfessionsValueObject', $api->getProfessions());
+        $this->assertInstanceOf('Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Profession\Model\ProfessionsValueObject', $api->getProfessions());
     }
 
     public function testGetMounts()
@@ -109,7 +109,7 @@ class CharacterProfileApiTest extends PHPUnit_Framework_TestCase
             $this->realm
         );
 
-        $this->assertInstanceOf('Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Mount\MountsValueObject', $api->getMounts());
+        $this->assertInstanceOf('Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Collection\Model\CollectionValueObject', $api->getMounts());
     }
 
     public function testGetPets()
@@ -121,6 +121,6 @@ class CharacterProfileApiTest extends PHPUnit_Framework_TestCase
             $this->realm
         );
 
-        $this->assertInstanceOf('Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Pet\PetsValueObject', $api->getPets());
+        $this->assertInstanceOf('Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Collection\Model\CollectionValueObject', $api->getPets());
     }
 }

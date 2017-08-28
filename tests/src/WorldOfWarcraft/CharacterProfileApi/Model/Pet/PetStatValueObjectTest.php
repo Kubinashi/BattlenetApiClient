@@ -1,6 +1,6 @@
 <?php
 
-use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Pet\PetStatValueObject;
+use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Collection\Model\PetStatValueObject;
 
 /**
  * @author  Willy Reiche

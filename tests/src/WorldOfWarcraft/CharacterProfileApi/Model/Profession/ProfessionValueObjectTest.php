@@ -5,7 +5,7 @@
  * @version 1.0
  */
 
-use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Profession\ProfessionValueObject;
+use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Profession\Model\ProfessionValueObject;
 
 class ProfessionValueObjectTest extends PHPUnit_Framework_TestCase
 {

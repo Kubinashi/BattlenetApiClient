@@ -5,7 +5,7 @@
  * @version 1.0
  */
 
-use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Mount\MountValueObject;
+use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Collection\Model\MountValueObject;
 
 class MountValueObjectTest extends PHPUnit_Framework_TestCase
 {

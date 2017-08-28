@@ -1,12 +1,12 @@
 <?php
+
+use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Shared\Model\SpecValueObject;
+
 /**
  * @author  Willy Reiche
  * @since   2017-07-23
  * @version 1.0
  */
-
-use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\HunterPet\HunterPetSpecValueObject;
-
 class HunterPetSpecValueObjectTest extends PHPUnit_Framework_TestCase
 {
     private $order;
@@ -28,7 +28,7 @@ class HunterPetSpecValueObjectTest extends PHPUnit_Framework_TestCase
 
     public function testGetPetName()
     {
-        $object = new HunterPetSpecValueObject(
+        $object = new SpecValueObject(
             $this->specName,
             $this->role,
             $this->backgroundImage,
@@ -42,7 +42,7 @@ class HunterPetSpecValueObjectTest extends PHPUnit_Framework_TestCase
 
     public function testGetRole()
     {
-        $object = new HunterPetSpecValueObject(
+        $object = new SpecValueObject(
             $this->specName,
             $this->role,
             $this->backgroundImage,
@@ -56,7 +56,7 @@ class HunterPetSpecValueObjectTest extends PHPUnit_Framework_TestCase
 
     public function testGetBackgroundImage()
     {
-        $object = new HunterPetSpecValueObject(
+        $object = new SpecValueObject(
             $this->specName,
             $this->role,
             $this->backgroundImage,
@@ -70,7 +70,7 @@ class HunterPetSpecValueObjectTest extends PHPUnit_Framework_TestCase
 
     public function testGetIcon()
     {
-        $object = new HunterPetSpecValueObject(
+        $object = new SpecValueObject(
             $this->specName,
             $this->role,
             $this->backgroundImage,
@@ -84,7 +84,7 @@ class HunterPetSpecValueObjectTest extends PHPUnit_Framework_TestCase
 
     public function testGetDescription()
     {
-        $object = new HunterPetSpecValueObject(
+        $object = new SpecValueObject(
             $this->specName,
             $this->role,
             $this->backgroundImage,
@@ -98,7 +98,7 @@ class HunterPetSpecValueObjectTest extends PHPUnit_Framework_TestCase
 
     public function testGetOrder()
     {
-        $object = new HunterPetSpecValueObject(
+        $object = new SpecValueObject(
             $this->specName,
             $this->role,
             $this->backgroundImage,

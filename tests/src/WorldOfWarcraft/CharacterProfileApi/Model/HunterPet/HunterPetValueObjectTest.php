@@ -5,7 +5,7 @@
  * @version 1.0
  */
 
-use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\HunterPet\HunterPetValueObject;
+use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\HunterPet\Model\HunterPetValueObject;
 
 class HunterPetValueObjectTest extends PHPUnit_Framework_TestCase
 {
@@ -22,7 +22,7 @@ class HunterPetValueObjectTest extends PHPUnit_Framework_TestCase
         $this->petName = uniqid();
         $this->creature = uniqid();
         $this->slot = uniqid();
-        $this->hunterPetSpecValueObject = $this->getMockBuilder('Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\HunterPet\HunterPetSpecValueObject')->disableOriginalConstructor()->getMock();
+        $this->hunterPetSpecValueObject = $this->getMockBuilder('Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Shared\Model\SpecValueObject')->disableOriginalConstructor()->getMock();
         $this->calcSpec = uniqid();
         $this->familyId = uniqid();
         $this->familyName = uniqid();

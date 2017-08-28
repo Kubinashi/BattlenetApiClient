@@ -1,6 +1,6 @@
 <?php
 
-use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Pet\PetsValueObject;
+use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Collection\Model\CollectionValueObject;
 
 /**
  * @author  Willy Reiche
@@ -17,12 +17,12 @@ class PetsValueObjectTest extends PHPUnit_Framework_TestCase
     {
         $this->numCollected = 123;
         $this->numNotCollected = 123;
-        $this->collectedPets = $this->getMockBuilder('Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Pet\PetValueObject')->disableOriginalConstructor()->getMock();
+        $this->collectedPets = $this->getMockBuilder('Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Collection\Model\PetValueObject')->disableOriginalConstructor()->getMock();
     }
 
     public function testGetNumCollected()
     {
-        $object = new PetsValueObject(
+        $object = new CollectionValueObject(
             $this->numCollected,
             $this->numNotCollected,
             $this->collectedPets
@@ -33,7 +33,7 @@ class PetsValueObjectTest extends PHPUnit_Framework_TestCase
 
     public function testGetNumNotCollected()
     {
-        $object = new PetsValueObject(
+        $object = new CollectionValueObject(
             $this->numCollected,
             $this->numNotCollected,
             $this->collectedPets
@@ -44,12 +44,12 @@ class PetsValueObjectTest extends PHPUnit_Framework_TestCase
 
     public function testGetCollectedPets()
     {
-        $object = new PetsValueObject(
+        $object = new CollectionValueObject(
             $this->numCollected,
             $this->numNotCollected,
             $this->collectedPets
         );
 
-        $this->assertEquals($this->collectedPets, $object->getCollectedPets());
+        $this->assertEquals($this->collectedPets, $object->getCollected());
     }
 }

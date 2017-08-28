@@ -5,7 +5,7 @@
  * @version 1.0
  */
 
-use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Mount\MountsValueObject;
+use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Collection\Model\CollectionValueObject;
 
 class MountsValueObjectTest extends PHPUnit_Framework_TestCase
 {
@@ -22,7 +22,7 @@ class MountsValueObjectTest extends PHPUnit_Framework_TestCase
 
     public function testGetNumCollected()
     {
-        $object = new MountsValueObject(
+        $object = new CollectionValueObject(
             $this->numCollected,
             $this->numNotCollected,
             $this->collectedMounts
@@ -33,7 +33,7 @@ class MountsValueObjectTest extends PHPUnit_Framework_TestCase
 
     public function testGetNumNotCollected()
     {
-        $object = new MountsValueObject(
+        $object = new CollectionValueObject(
             $this->numCollected,
             $this->numNotCollected,
             $this->collectedMounts
@@ -44,12 +44,12 @@ class MountsValueObjectTest extends PHPUnit_Framework_TestCase
 
     public function testGetCollectedMounts()
     {
-        $object = new MountsValueObject(
+        $object = new CollectionValueObject(
             $this->numCollected,
             $this->numNotCollected,
             $this->collectedMounts
         );
 
-        $this->assertEquals($this->collectedMounts, $object->getCollectedMounts());
+        $this->assertEquals($this->collectedMounts, $object->getCollected());
     }
 }

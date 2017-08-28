@@ -1,6 +1,6 @@
 <?php
 
-use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Pet\PetValueObject;
+use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Collection\Model\PetValueObject;
 
 /**
  * @author  Willy Reiche
@@ -32,7 +32,7 @@ class PetValueObjectTest extends PHPUnit_Framework_TestCase
         $this->itemId = 123;
         $this->qualityId = 123;
         $this->icon = uniqid();
-        $this->petStatValueObject = $this->getMockBuilder('Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Pet\PetStatValueObject')->disableOriginalConstructor()->getMock();
+        $this->petStatValueObject = $this->getMockBuilder('Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Collection\Model\PetStatValueObject')->disableOriginalConstructor()->getMock();
         $this->battlePetGuid = uniqid();
         $this->isFavorite = true;
         $this->isFirstAbilitySlotSelected = true;
