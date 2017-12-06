@@ -13,6 +13,7 @@ class CriteriaService
 {
     /**
      * @param \StdClass $criteria
+     *
      * @return CriteriaValueObject
      */
     public function prepareCriteriaValueObject($criteria)
@@ -23,5 +24,26 @@ class CriteriaService
             $criteria->orderIndex,
             $criteria->max
         );
+    }
+
+    /**
+     * @param \StdClass[] $criteria
+     *
+     * @return CriteriaValueObject[]
+     */
+    public function prepareMultipleCriteriaValueObject($criteria)
+    {
+        $criteriaValueObjects = [];
+
+        foreach ($criteria as $criterion) {
+            $criteriaValueObjects[] = new CriteriaValueObject(
+                $criterion->id,
+                $criterion->description,
+                $criterion->orderIndex,
+                $criterion->max
+            );
+        }
+
+        return $criteriaValueObjects;
     }
 }

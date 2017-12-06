@@ -2,8 +2,6 @@
 
 namespace Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Feed\Model;
 
-use Kubinashi\BattlenetApi\WorldOfWarcraft\Model\AchievementValueObject;
-
 /**
  * @author  Willy Reiche
  * @since   2017-08-22

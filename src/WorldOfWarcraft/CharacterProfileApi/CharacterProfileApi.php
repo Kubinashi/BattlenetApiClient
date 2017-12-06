@@ -420,6 +420,7 @@ class CharacterProfileApi{
 
     /**
      * @param string $addition
+     *
      * @return RequestModel
      */
     private function prepareRequestModel($addition)

@@ -1,7 +1,7 @@
 <?php
 
 namespace Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Feed\Model;
-use Kubinashi\BattlenetApi\WorldOfWarcraft\Model\AchievementValueObject;
+
 use Kubinashi\BattlenetApi\WorldOfWarcraft\Shared\Criteria\Model\CriteriaValueObject;
 
 /**

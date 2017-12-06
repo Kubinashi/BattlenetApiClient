@@ -1,6 +1,6 @@
 <?php
 
-namespace Kubinashi\BattlenetApi\WorldOfWarcraft\Model;
+namespace Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Feed\Model;
 
 use Kubinashi\BattlenetApi\WorldOfWarcraft\Shared\Criteria\Model\CriteriaValueObject;
 
