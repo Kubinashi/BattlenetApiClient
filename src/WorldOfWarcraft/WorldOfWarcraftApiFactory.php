@@ -5,6 +5,7 @@ namespace Kubinashi\BattlenetApi\WorldOfWarcraft;
 use Kubinashi\BattlenetApi\Model\AuthenticationModel;
 use Kubinashi\BattlenetApi\Service\RequestService;
 use Kubinashi\BattlenetApi\WorldOfWarcraft\AchievementApi\AchievementApi;
+use Kubinashi\BattlenetApi\WorldOfWarcraft\AuctionApi\AuctionApi;
 use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\CharacterProfileApi;
 
 /**
@@ -53,9 +54,23 @@ class WorldOfWarcraftApiFactory
         );
     }
 
+    /**
+     * @return AchievementApi
+     */
     public static function getAchievementApi()
     {
         return new AchievementApi(
+            self::$authenticationModel,
+            self::$requestService
+        );
+    }
+
+    /**
+     * @return AuctionApi
+     */
+    public static function getAuctionApi()
+    {
+        return new AuctionApi(
             self::$authenticationModel,
             self::$requestService
         );
