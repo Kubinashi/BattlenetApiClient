@@ -1,13 +1,11 @@
 <?php
-/**
- * @author  Willy Reiche
- * @since   2017-07-25
- * @version 1.0
- */
+
+namespace Kubinashi\BattlenetApiTests\src\WorldOfWarcraft\CharacterProfileApi\Model\Mount;
 
 use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Collection\Model\MountValueObject;
+use PHPUnit\Framework\TestCase;
 
-class MountValueObjectTest extends PHPUnit_Framework_TestCase
+class MountValueObjectTest extends TestCase
 {
     private $isJumping;
     private $isAquatic;
@@ -20,7 +18,7 @@ class MountValueObjectTest extends PHPUnit_Framework_TestCase
     private $spellId;
     private $mountName;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->mountName = uniqid();
         $this->spellId = uniqid();

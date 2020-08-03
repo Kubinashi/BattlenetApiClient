@@ -2,17 +2,12 @@
 
 namespace Kubinashi\BattlenetApi\Model;
 
-/**
- * @author  Willy Reiche
- * @since   2017-07-20
- * @version 1.0
- */
 class AuthenticationModel
 {
     /**
      * @var string
      */
-    private $apiKey;
+    private $clientId;
 
     /**
      * @var string
@@ -25,39 +20,34 @@ class AuthenticationModel
     private $region;
 
     /**
-     * AuthenticationModel constructor.
-     *
-     * @param string $apiKey
-     * @param string $locale
-     * @param string $region
+     * @var string
      */
-    public function __construct($apiKey, $locale, $region)
+    private $clientSecret;
+
+    public function __construct(string $clientId, string $clientSecret, string $locale, string $region)
     {
-        $this->apiKey = $apiKey;
+        $this->clientId = $clientId;
+        $this->clientSecret = $clientSecret;
         $this->locale = $locale;
         $this->region = $region;
     }
 
-    /**
-     * @return string
-     */
-    public function getApiKey()
+    public function getClientSecret(): string
     {
-        return $this->apiKey;
+        return $this->clientSecret;
     }
 
-    /**
-     * @return string
-     */
-    public function getLocale()
+    public function getClientId(): string
+    {
+        return $this->clientId;
+    }
+
+    public function getLocale(): string
     {
         return $this->locale;
     }
 
-    /**
-     * @return string
-     */
-    public function getRegion()
+    public function getRegion(): string
     {
         return $this->region;
     }

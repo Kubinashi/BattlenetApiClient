@@ -1,13 +1,11 @@
 <?php
-/**
- * @author  Willy Reiche
- * @since   2017-07-23
- * @version 1.0
- */
+
+namespace Kubinashi\BattlenetApiTests\src\WorldOfWarcraft\CharacterProfileApi\Model;
 
 use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Guild\Model\GuildValueObject;
+use PHPUnit\Framework\TestCase;
 
-class GuildValueObjectTest extends PHPUnit_Framework_TestCase
+class GuildValueObjectTest extends TestCase
 {
     private $guildName;
     private $realm;
@@ -15,7 +13,7 @@ class GuildValueObjectTest extends PHPUnit_Framework_TestCase
     private $members;
     private $emblemValueObject;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->guildName = uniqid();
         $this->realm = uniqid();

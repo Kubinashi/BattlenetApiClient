@@ -1,13 +1,11 @@
 <?php
 
-use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Shared\Model\SpecValueObject;
+namespace Kubinashi\BattlenetApiTests\src\WorldOfWarcraft\CharacterProfileApi\Model\HunterPet;
 
-/**
- * @author  Willy Reiche
- * @since   2017-07-23
- * @version 1.0
- */
-class HunterPetSpecValueObjectTest extends PHPUnit_Framework_TestCase
+use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Shared\Model\SpecValueObject;
+use PHPUnit\Framework\TestCase;
+
+class HunterPetSpecValueObjectTest extends TestCase
 {
     private $order;
     private $description;
@@ -16,7 +14,7 @@ class HunterPetSpecValueObjectTest extends PHPUnit_Framework_TestCase
     private $role;
     private $specName;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->specName = uniqid();
         $this->role = uniqid();

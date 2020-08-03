@@ -65,7 +65,7 @@ class AuctionApi
     {
         return new RequestModel(
             $this->authenticationModel->getRegion(),
-            $this->authenticationModel->getApiKey(),
+            $this->authenticationModel->getClientId(),
             $this->authenticationModel->getLocale(),
             ['data', $field],
             'auction',

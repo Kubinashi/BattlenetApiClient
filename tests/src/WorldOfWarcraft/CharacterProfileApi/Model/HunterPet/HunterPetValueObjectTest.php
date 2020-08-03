@@ -1,13 +1,11 @@
 <?php
-/**
- * @author  Willy Reiche
- * @since   2017-07-23
- * @version 1.0
- */
+
+namespace Kubinashi\BattlenetApiTests\src\WorldOfWarcraft\CharacterProfileApi\Model\HunterPet;
 
 use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\HunterPet\Model\HunterPetValueObject;
+use PHPUnit\Framework\TestCase;
 
-class HunterPetValueObjectTest extends PHPUnit_Framework_TestCase
+class HunterPetValueObjectTest extends TestCase
 {
     private $familyName;
     private $familyId;
@@ -17,7 +15,7 @@ class HunterPetValueObjectTest extends PHPUnit_Framework_TestCase
     private $creature;
     private $petName;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->petName = uniqid();
         $this->creature = uniqid();

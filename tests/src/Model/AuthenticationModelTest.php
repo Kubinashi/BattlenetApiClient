@@ -14,7 +14,7 @@ class AuthenticationModelTest extends TestCase
     private $apiKey;
     private $local;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->apiKey = uniqid();
         $this->local = uniqid();
@@ -25,7 +25,7 @@ class AuthenticationModelTest extends TestCase
     {
         $model = new AuthenticationModel($this->apiKey, $this->local, $this->region);
 
-        $this->assertEquals($this->apiKey, $model->getApiKey());
+        $this->assertEquals($this->apiKey, $model->getClientId());
     }
 
     public function testGetLocale()

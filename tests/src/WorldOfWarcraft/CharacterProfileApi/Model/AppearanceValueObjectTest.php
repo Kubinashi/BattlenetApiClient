@@ -1,13 +1,11 @@
 <?php
-/**
- * @author  Willy Reiche
- * @since   2017-07-23
- * @version 1.0
- */
+
+namespace Kubinashi\BattlenetApiTests\src\WorldOfWarcraft\CharacterProfileApi\Model;
 
 use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Appearance\Model\AppearanceValueObject;
+use PHPUnit\Framework\TestCase;
 
-class AppearanceValueObjectTest extends PHPUnit_Framework_TestCase
+class AppearanceValueObjectTest extends TestCase
 {
     private $faceVariation;
     private $skinColor;
@@ -18,7 +16,7 @@ class AppearanceValueObjectTest extends PHPUnit_Framework_TestCase
     private $showCloak;
     private $customDisplayOptions;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->faceVariation = uniqid();
         $this->skinColor = uniqid();

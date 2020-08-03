@@ -1,13 +1,11 @@
 <?php
-/**
- * @author  Willy Reiche
- * @since   2017-07-24
- * @version 1.0
- */
+
+namespace Kubinashi\BattlenetApiTests\src\WorldOfWarcraft\CharacterProfileApi\Model\Profession;
 
 use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Profession\Model\ProfessionValueObject;
+use PHPUnit\Framework\TestCase;
 
-class ProfessionValueObjectTest extends PHPUnit_Framework_TestCase
+class ProfessionValueObjectTest extends TestCase
 {
     private $recipes;
     private $max;
@@ -16,7 +14,7 @@ class ProfessionValueObjectTest extends PHPUnit_Framework_TestCase
     private $professionName;
     private $id;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->id = uniqid();
         $this->professionName = uniqid();

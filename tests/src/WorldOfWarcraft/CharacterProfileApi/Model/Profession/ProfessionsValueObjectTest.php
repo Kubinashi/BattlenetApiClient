@@ -1,18 +1,16 @@
 <?php
-/**
- * @author  Willy Reiche
- * @since   2017-07-24
- * @version 1.0
- */
+
+namespace Kubinashi\BattlenetApiTests\src\WorldOfWarcraft\CharacterProfileApi\Model\Profession;
 
 use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Profession\Model\ProfessionsValueObject;
+use PHPUnit\Framework\TestCase;
 
-class ProfessionsValueObjectTest extends PHPUnit_Framework_TestCase
+class ProfessionsValueObjectTest extends TestCase
 {
     private $primaryProfessions;
     private $secondaryProfessions;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->primaryProfessions = $this->getMockBuilder('Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Profession\ProfessionValueObject')->disableOriginalConstructor()->getMock();
         $this->secondaryProfessions = $this->getMockBuilder('Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Model\Profession\ProfessionValueObject')->disableOriginalConstructor()->getMock();

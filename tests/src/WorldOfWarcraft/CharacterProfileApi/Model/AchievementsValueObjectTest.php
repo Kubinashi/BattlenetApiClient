@@ -1,13 +1,11 @@
 <?php
-/**
- * @author  Willy Reiche
- * @since   2017-07-23
- * @version 1.0
- */
+
+namespace Kubinashi\BattlenetApiTests\src\WorldOfWarcraft\CharacterProfileApi\Model;
 
 use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Achievement\Model\AchievementsValueObject;
+use PHPUnit\Framework\TestCase;
 
-class AchievementsValueObjectTest extends PHPUnit_Framework_TestCase
+class AchievementsValueObjectTest extends TestCase
 {
     private $achievementsCompleted;
     private $achievementsCompletedTimestamp;
@@ -16,7 +14,7 @@ class AchievementsValueObjectTest extends PHPUnit_Framework_TestCase
     private $criteriaTimestamp;
     private $criteriaCreated;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->achievementsCompleted = uniqid();
         $this->achievementsCompletedTimestamp = uniqid();

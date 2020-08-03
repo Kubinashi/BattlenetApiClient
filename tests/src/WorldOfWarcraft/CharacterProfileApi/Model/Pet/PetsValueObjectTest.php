@@ -1,19 +1,17 @@
 <?php
 
-use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Collection\Model\CollectionValueObject;
+namespace Kubinashi\BattlenetApiTests\src\WorldOfWarcraft\CharacterProfileApi\Model\Pet;
 
-/**
- * @author  Willy Reiche
- * @since   2017-07-27
- * @version 1.0
- */
-class PetsValueObjectTest extends PHPUnit_Framework_TestCase
+use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Collection\Model\CollectionValueObject;
+use PHPUnit\Framework\TestCase;
+
+class PetsValueObjectTest extends TestCase
 {
     private $collectedPets;
     private $numNotCollected;
     private $numCollected;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->numCollected = 123;
         $this->numNotCollected = 123;

@@ -1,5 +1,7 @@
 <?php
 
+namespace Kubinashi\BattlenetApiTests\src;
+
 use Kubinashi\BattlenetApi\BattlenetApiClientFactory;
 use Kubinashi\BattlenetApi\WorldOfWarcraft\WorldOfWarcraftApiFactory;
 use PHPUnit\Framework\TestCase;

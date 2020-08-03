@@ -2,17 +2,12 @@
 
 namespace Kubinashi\BattlenetApi\Model;
 
-/**
- * @author  Willy Reiche
- * @since   2017-07-20
- * @version 1.0
- */
 class RequestModel
 {
     /**
      * @var string
      */
-    private $apiKey;
+    private $clientId;
 
     /**
      * @var string
@@ -45,86 +40,78 @@ class RequestModel
     private $addition;
 
     /**
-     * RequestModel constructor.
-     *
-     * @param string $region
-     * @param string $apiKey
-     * @param string $locale
-     * @param array  $fields
-     * @param string $api
-     * @param string $franchise
-     * @param string $addition
+     * @var string
      */
+    private $clientSecret;
+
+    /**
+     * @var string
+     */
+    private $type;
+
     public function __construct(
-        $region,
-        $apiKey,
-        $locale,
-        $fields,
-        $api,
-        $franchise,
-        $addition
+        string $region,
+        string $clientId,
+        string $locale,
+        array $fields,
+        string $api,
+        string $franchise,
+        string $addition,
+        string $clientSecret,
+        string $type
     ) {
         $this->region = $region;
-        $this->apiKey = $apiKey;
+        $this->clientId = $clientId;
         $this->locale = $locale;
         $this->api = $api;
         $this->fields = $fields;
         $this->franchise = $franchise;
         $this->addition = $addition;
+        $this->clientSecret = $clientSecret;
+        $this->type = $type;
     }
 
-    /**
-     * @return string
-     */
-    public function getApiKey()
+    public function getType(): string
     {
-        return $this->apiKey;
+        return $this->type;
     }
 
-    /**
-     * @return string
-     */
-    public function getLocale()
+    public function getClientSecret(): string
+    {
+        return $this->clientSecret;
+    }
+
+    public function getClientId(): string
+    {
+        return $this->clientId;
+    }
+
+    public function getLocale(): string
     {
         return $this->locale;
     }
 
-    /**
-     * @return string
-     */
-    public function getApi()
+    public function getApi(): string
     {
         return $this->api;
     }
 
-    /**
-     * @return array
-     */
-    public function getFields()
+    public function getFields(): array
     {
         return $this->fields;
     }
 
-    /**
-     * @return string
-     */
-    public function getFranchise()
+    public function getFranchise(): string
     {
         return $this->franchise;
     }
 
-    /**
-     * @return string
-     */
-    public function getRegion()
+    public function getRegion(): string
     {
         return $this->region;
     }
 
-    /**
-     * @return string
-     */
-    public function getAddition()
+    public function getAddition(): string
     {
         return $this->addition;
     }

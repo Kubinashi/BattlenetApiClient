@@ -11,15 +11,8 @@ use Kubinashi\BattlenetApi\WorldOfWarcraft\WorldOfWarcraftApiFactory;
  */
 class BattlenetApiClientFactory
 {
-    /**
-     * @param string $apiKey
-     * @param string $locale
-     * @param string $region
-     *
-     * @return WorldOfWarcraftApiFactory
-     */
-    public static function getWorldOfWarcraftApiFactory($apiKey, $locale, $region)
+    public static function getWorldOfWarcraftApiFactory(string $clientId, string $clientSecret, string $locale, string $region): WorldOfWarcraftApiFactory
     {
-        return new WorldOfWarcraftApiFactory($apiKey, $locale, $region);
+        return new WorldOfWarcraftApiFactory($clientId, $clientSecret, $locale, $region);
     }
 }

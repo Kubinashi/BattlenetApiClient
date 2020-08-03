@@ -26,11 +26,6 @@ use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Statistic\Service
 use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Stat\Service\StatService;
 use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Talent\Service\TalentService;
 
-/**
- * @author  Willy Reiche
- * @since   2017-07-19
- * @version 1.0
- */
 class CharacterProfileApi{
     /**
      * @var AuthenticationModel
@@ -418,30 +413,21 @@ class CharacterProfileApi{
         return $audit;
     }
 
-    /**
-     * @param string $addition
-     *
-     * @return RequestModel
-     */
-    private function prepareRequestModel($addition)
+    private function prepareRequestModel(string $addition): RequestModel
     {
         return new RequestModel(
             $this->authenticationModel->getRegion(),
-            $this->authenticationModel->getApiKey(),
+            $this->authenticationModel->getClientId(),
             $this->authenticationModel->getLocale(),
             [$this->realm, $this->charName],
             'character',
             Franchises::WORLD_OF_WARCRAFT,
-            $addition
+            $addition,
+            $this->authenticationModel->getClientSecret()
         );
     }
 
-    /**
-     * @param string $addition
-     *
-     * @return \StdClass
-     */
-    private function prepareResponseObject($addition = '')
+    private function prepareResponseObject(string $addition = ''): \StdClass
     {
         $requestModel = $this->prepareRequestModel($addition);
         $response = $this->requestService->doRequest($requestModel);

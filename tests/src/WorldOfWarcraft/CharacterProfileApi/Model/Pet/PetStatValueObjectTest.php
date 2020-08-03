@@ -1,13 +1,11 @@
 <?php
 
-use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Collection\Model\PetStatValueObject;
+namespace Kubinashi\BattlenetApiTests\src\WorldOfWarcraft\CharacterProfileApi\Model\Pet;
 
-/**
- * @author  Willy Reiche
- * @since   2017-07-27
- * @version 1.0
- */
-class PetStatValueObjectTest extends PHPUnit_Framework_TestCase
+use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Collection\Model\PetStatValueObject;
+use PHPUnit\Framework\TestCase;
+
+class PetStatValueObjectTest extends TestCase
 {
     private $speed;
     private $power;
@@ -17,7 +15,7 @@ class PetStatValueObjectTest extends PHPUnit_Framework_TestCase
     private $breedId;
     private $speciesId;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->speciesId = 123;
         $this->breedId = 123;

@@ -1,19 +1,17 @@
 <?php
-/**
- * @author  Willy Reiche
- * @since   2017-07-25
- * @version 1.0
- */
+
+namespace Kubinashi\BattlenetApiTests\src\WorldOfWarcraft\CharacterProfileApi\Model\Mount;
 
 use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Collection\Model\CollectionValueObject;
+use PHPUnit\Framework\TestCase;
 
-class MountsValueObjectTest extends PHPUnit_Framework_TestCase
+class MountsValueObjectTest extends TestCase
 {
     private $numCollected;
     private $collectedMounts;
     private $numNotCollected;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->numCollected = 123;
         $this->numNotCollected = 123;

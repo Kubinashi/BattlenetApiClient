@@ -79,7 +79,7 @@ class AchievementApi
     {
         return new RequestModel(
             $this->authenticationModel->getRegion(),
-            $this->authenticationModel->getApiKey(),
+            $this->authenticationModel->getClientId(),
             $this->authenticationModel->getLocale(),
             [$field],
             'achievement',

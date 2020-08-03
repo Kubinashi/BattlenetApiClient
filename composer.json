@@ -18,18 +18,19 @@
   ],
 
   "require": {
-    "php": ">=5.6",
+    "php": ">=7.3",
     "guzzlehttp/guzzle": "^6.3"
   },
 
   "require-dev": {
-    "phpunit/phpunit": "3.* || 4.*",
-    "doctrine/instantiator": "1.0.5"
+    "phpunit/phpunit": "9.*",
+    "doctrine/instantiator": "1.3.1"
   },
 
   "autoload": {
     "psr-4": {
-      "Kubinashi\\BattlenetApi\\": "src/"
+      "Kubinashi\\BattlenetApi\\": "src/",
+      "Kubinashi\\BattlenetApiTests\\": "tests/"
     }
   }
 }

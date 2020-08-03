@@ -25,16 +25,9 @@ class WorldOfWarcraftApiFactory
      */
     private static $requestService;
 
-    /**
-     * WorldOfWarcraftApi constructor.
-     *
-     * @param string $apiKey
-     * @param string $locale
-     * @param string $region
-     */
-    public function __construct($apiKey, $locale, $region)
+    public function __construct(string $clientId, string $clientSecret, string $locale, string $region)
     {
-        self::$authenticationModel = new AuthenticationModel($apiKey, $locale, $region);
+        self::$authenticationModel = new AuthenticationModel($clientId, $clientSecret, $locale, $region);
         self::$requestService = new RequestService();
     }
 
@@ -49,8 +42,8 @@ class WorldOfWarcraftApiFactory
         return new CharacterProfileApi(
             self::$authenticationModel,
             self::$requestService,
-            $charName,
-            $realm
+            strtolower($charName),
+            strtolower($realm)
         );
     }
 

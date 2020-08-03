@@ -1,13 +1,11 @@
 <?php
-/**
- * @author  Willy Reiche
- * @since   2017-07-23
- * @version 1.0
- */
+
+namespace Kubinashi\BattlenetApiTests\src\WorldOfWarcraft\CharacterProfileApi\Model;
 
 use Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\CharacterProfile\Model\CharacterProfileValueObject;
+use PHPUnit\Framework\TestCase;
 
-class CharacterProfileValueObjectTest extends PHPUnit_Framework_TestCase
+class CharacterProfileValueObjectTest extends TestCase
 {
     private $lastModified;
     private $charName;
@@ -23,7 +21,7 @@ class CharacterProfileValueObjectTest extends PHPUnit_Framework_TestCase
     private $class;
     private $battleGroup;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->lastModified = uniqid();
         $this->charName = uniqid();

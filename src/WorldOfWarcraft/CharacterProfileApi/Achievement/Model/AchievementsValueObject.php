@@ -2,11 +2,6 @@
 
 namespace Kubinashi\BattlenetApi\WorldOfWarcraft\CharacterProfileApi\Achievement\Model;
 
-/**
- * @author  Willy Reiche
- * @since   2017-07-22
- * @version 1.0
- */
 class AchievementsValueObject
 {
     /**

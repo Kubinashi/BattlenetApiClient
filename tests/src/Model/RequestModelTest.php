@@ -18,7 +18,7 @@ class RequestModelTest extends TestCase
     private $franchise;
     private $addition;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->apiKey = uniqid();
         $this->local = uniqid();
@@ -33,7 +33,7 @@ class RequestModelTest extends TestCase
     {
         $model = new RequestModel($this->region, $this->apiKey, $this->local, $this->fields, $this->api, $this->franchise, $this->addition);
 
-        $this->assertEquals($this->apiKey, $model->getApiKey());
+        $this->assertEquals($this->apiKey, $model->getClientId());
     }
 
     public function testGetLocale()
